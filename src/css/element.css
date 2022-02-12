@@ -1,0 +1,16 @@
+
+.el-card__header {
+    padding-left: 0;
+    background-color: #fff !important;
+}
+.el-card {    
+    width: 80%;
+    margin: 0 auto;
+    max-width: 500px;
+}
+
+.el-card__body {
+    padding: 10px;
+}
+
+
