@@ -14,3 +14,10 @@ export default {
   },
 }
 </script>
+
+<style >
+.home {
+  margin-left: 210px;
+}
+
+</style>
