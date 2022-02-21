@@ -22,5 +22,7 @@
     padding: 10px;
     padding-top: 0px;
 }
-
+.el-loading-parent--relative {
+    z-index: 0;
+}
 

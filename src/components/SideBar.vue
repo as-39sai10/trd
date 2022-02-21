@@ -1,32 +1,48 @@
 --- Sidebar.vue
 <template>
   <div class="sidebar-container">
-    <!-- <ul class="side">
-      <li class="side-list" v-for="(item, index) in items" :key="index">
-        <router-link class="side-list-text" v-bind:to="item.path">
-          {{ item.title }}
-        </router-link>
+    <ul class="side" v-for="(woeid, index) in woeidList" :key="index">   
+        <i class="el-icon-location"></i> 
+        <a class="locale-list" @click="selectArea(index)" >{{ woeid.label }}</a>
+      <li class="side-list" v-for="(item, index) in woeid" :key="index">      
       </li>
-    </ul> -->
+    </ul>
   </div>
 </template>
 
 <script>
 export default {
   name: "SideBar",
+  props: ["all_woeid"],
   data() {
-    return {      
+    return {
       open: false,
+      woeidList: this.all_woeid,
     };
+  },
+  methods: {
+    selectArea: function(index) {
+      // alert(index);
+      this.$store.dispatch("ActionUpdateArea", index);
+    }
   },
 };
 </script>
+
 <style>
 .my-image {
   width: 50%;
   height: 50%;
   border: medium solid #000;
   background-color: #fff;
+}
+.side {
+  margin-top: 25px;
+}
+.side-list {
+  text-align: left;
+  margin-bottom: 15px;
+  font-weight: 600;
 }
 .my-image-div {
   padding-top: 20px;
@@ -37,7 +53,7 @@ export default {
   background: #98fb98;
   float: left;
   position: fixed;
-  z-index: 1;
+  z-index: 10;
 }
 .sidebar-container h1 {
   color: #40b983;
