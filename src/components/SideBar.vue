@@ -1,12 +1,23 @@
 --- Sidebar.vue
 <template>
   <div class="sidebar-container">
-    <ul class="side" v-for="(woeid, index) in woeidList" :key="index">   
-        <i class="el-icon-location"></i> 
-        <a class="locale-list" @click="selectArea(index)" >{{ woeid.label }}</a>
-      <li class="side-list" v-for="(item, index) in woeid" :key="index">      
-      </li>
-    </ul>
+    <el-menu
+      default-active="3"
+      class="el-menu-vertical-demo"
+      background-color="#98fb98"
+      active-text-color="#303133"
+      @open="handleOpen"
+      @close="handleClose"
+    >
+      <ul class="side" v-for="(woeid, index) in woeidList" :key="index">
+        <el-menu-item index="index" @click="selectArea(index)">
+          <i class="el-icon-location"></i>
+          <div class="locale-list">{{
+            woeid.label
+          }}</div>
+        </el-menu-item>
+      </ul>
+    </el-menu>
   </div>
 </template>
 
@@ -21,10 +32,10 @@ export default {
     };
   },
   methods: {
-    selectArea: function(index) {
+    selectArea: function (index) {
       // alert(index);
       this.$store.dispatch("ActionUpdateArea", index);
-    }
+    },
   },
 };
 </script>
@@ -35,9 +46,6 @@ export default {
   height: 50%;
   border: medium solid #000;
   background-color: #fff;
-}
-.side {
-  margin-top: 25px;
 }
 .side-list {
   text-align: left;
@@ -57,6 +65,13 @@ export default {
 }
 .sidebar-container h1 {
   color: #40b983;
+}
+.side {
+  padding-inline-start: 0px;
+  height: 50px;
+}
+.locale-list {
+  line-height: 50px;
 }
 @media screen and (max-width: 780px) {
   .sidebar-container {
