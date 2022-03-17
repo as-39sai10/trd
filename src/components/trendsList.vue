@@ -142,6 +142,7 @@ ul {
 }
 .trends {
   margin-left: 200px;
+  margin-bottom: 30px;
   display: flex;
 }
 .row-possion {
