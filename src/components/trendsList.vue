@@ -1,6 +1,6 @@
 <template>
   <div class="trends">
-    <div class="row-possion" v-for="(woeid, arr) in buf" :key="arr">
+    <div class="row-possion" v-for="(woeid, ind) in buf" :key="ind">
       <el-card class="box-card">
         <div slot="header" class="clearfix">
           <span class="span-type">● {{ woeid.prefecture }} ●</span>
@@ -8,10 +8,10 @@
         <ul v-loading="loading">
           <li
             :class="{
-              'row-disp-none': index + 1 > 20 && rowVisibled === false,
+              'row-disp-none': index + 1 > 20 && rowVisibled[ind] === false,
             }"
             class="column1"
-            v-for="(arr, index) in resultList[arr]"
+            v-for="(arr, index) in resultList[ind]"
             :key="index"
           >
             <div class="text-left">
@@ -19,18 +19,19 @@
               <a class="text-left tr_name" :href="arr.url" target="_blank">{{
                 arr.name
               }}</a>
-              <div class="tw-vol text-left">
+              <div class="tw-vol text-left" v-if="arr.tweet_volume">
                 {{ arr.tweet_volume }}件のツイート
               </div>
+              <div class="tw-vol text-left" else-if=""></div>
             </div>
             <!-- <div>{{ arr.query }}</div>
       <div>{{ arr.url }}</div> -->
           </li>
-          <div :class="{ 'row-disp-none': rowVisibled === true }">
+          <div :class="{ 'row-disp-none': rowVisibled[ind] === true }">
             <el-button
               type="success"
               class="btn-pos"
-              @click="rowVisible()"
+              @click="rowVisible(ind)"
               plain
               >...more</el-button
             >
@@ -53,7 +54,7 @@ export default {
       woeidList: this.all_woeid,
       changed: false,
       loading: true,
-      rowVisibled: false,
+      rowVisibled: [false],
       changeArea: "japan_woeid",
       buf: [],
     };
@@ -73,10 +74,12 @@ export default {
 
       _this.buf = [];
       _this.resultList = [];
+      _this.rowVisibled = [];
       for (const key in _this.woeidList) {
         if (areaStr === key) {
           for (const arr of _this.woeidList[key].id) {
             _this.buf.push(arr);
+            _this.rowVisibled.push(false)
           }
         }
       }
@@ -114,8 +117,8 @@ export default {
     testFnc: function (data) {
       alert(data);
     },
-    rowVisible: function () {
-      this.rowVisibled = true;
+    rowVisible: function (ind) {
+      this.$set(this.rowVisibled, ind, true)
     },
   },
   computed: {
@@ -165,6 +168,7 @@ ul {
 .tw-vol {
   margin-left: 30px;
   font-size: 10px;
+  height: 10px;
 }
 .row-disp-none {
   display: none;

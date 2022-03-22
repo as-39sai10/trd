@@ -22,13 +22,13 @@ export default {
       all_woeid: {
         japan_woeid: {
           label: "日本",
-          id: [{ prefecture: "Japan", value: 23424856 }],
+          id: [{ prefecture: "Japan", value: 23424856, visbled: false}],
         },
         tohoku_woeid: {
           label: "東北",
           id: [
-          { prefecture: "Sapporo", value: 1118108 },
-          { prefecture: "Sendai", value: 1118129 },
+          { prefecture: "Sapporo", value: 1118108, visbled: false},
+          { prefecture: "Sendai", value: 1118129, visbled: false},
         ]
         },
         kanto_woeid: {
