@@ -9,7 +9,6 @@
 <script>
 export default {
   name: "appHeader",
-  props: ["all_woeid"],
   data() {},
 };
 </script>

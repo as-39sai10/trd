@@ -27,7 +27,10 @@
             <!-- <div>{{ arr.query }}</div>
       <div>{{ arr.url }}</div> -->
           </li>
-          <div :class="{ 'row-disp-none': rowVisibled[ind] === true }">
+          <div
+            class="btn-mrg"
+            :class="{ 'row-disp-none': rowVisibled[ind] === true }"
+          >
             <el-button
               type="success"
               class="btn-pos"
@@ -79,7 +82,7 @@ export default {
         if (areaStr === key) {
           for (const arr of _this.woeidList[key].id) {
             _this.buf.push(arr);
-            _this.rowVisibled.push(false)
+            _this.rowVisibled.push(false);
           }
         }
       }
@@ -118,7 +121,7 @@ export default {
       alert(data);
     },
     rowVisible: function (ind) {
-      this.$set(this.rowVisibled, ind, true)
+      this.$set(this.rowVisibled, ind, true);
     },
   },
   computed: {
@@ -175,11 +178,13 @@ ul {
 .row-disp-none {
   display: none;
 }
-.row-disp-visible {
-}
 .btn-pos {
   margin-right: 30px !important;
 }
+.btn-mrg {
+  margin-top: 15px;
+}
+
 
 @media screen and (max-width: 780px) {
   .trends {
