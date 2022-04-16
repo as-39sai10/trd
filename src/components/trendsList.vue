@@ -156,7 +156,7 @@ ul {
   margin-top: 5vh;
 }
 .column-data {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   height: 35px;
 }
 .tr_name {
