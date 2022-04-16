@@ -8,9 +8,9 @@
         <ul v-loading="loading">
           <li
             :class="{
-              'row-disp-none': index + 1 > 20 && rowVisibled[ind] === false,
+              'row-disp-none': index + 1 > 15 && rowVisibled[ind] === false,
             }"
-            class="column1"
+            class="column-data"
             v-for="(arr, index) in resultList[ind]"
             :key="index"
           >
@@ -150,12 +150,14 @@ ul {
 }
 .row-possion {
   padding-right: 10px;
+  margin-top: 5vh;
 }
-.column1 {
+.column-data {
   margin-bottom: 5px;
+  height: 35px;
 }
 .tr_name {
-  font-size: 13px;
+  font-size: 14px;
   color: black;
   font-weight: 600;
 }

@@ -58,13 +58,10 @@ export default {
 .sidebar-container {
   width: 200px;
   height: 100vh;
-  background: #98fb98;
+  background-color: rgb(152, 251, 152);
   float: left;
   position: fixed;
   z-index: 10;
-}
-.sidebar-container h1 {
-  color: #40b983;
 }
 .side {
   padding-inline-start: 0px;

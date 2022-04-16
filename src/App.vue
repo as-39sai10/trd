@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <app-header></app-header>
     <side-bar :all_woeid="all_woeid"></side-bar>
     <trends-list :all_woeid="all_woeid"> </trends-list>
   </div>
@@ -8,7 +9,8 @@
 <script>
 import store from "./store";
 import SideBar from "@/components/SideBar";
-import TrendsList from "@/components/trendsList.vue";
+import TrendsList from "@/components/trendsList";
+import AppHeader from './components/AppHeader.vue';
 
 export default {
   name: "App",
@@ -16,6 +18,7 @@ export default {
   components: {
     SideBar,
     TrendsList,
+    AppHeader,
   },
   data() {
     return {
@@ -106,6 +109,10 @@ export default {
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #5eb080;
 }
+.sidebar-container {
+  margin-top: 5vh;
+}
+
 </style>
