@@ -58,7 +58,7 @@ export default {
 .sidebar-container {
   width: 200px;
   height: 100vh;
-  background-color: rgb(152, 251, 152);
+  background-color: aliceblue;
   float: left;
   position: fixed;
   z-index: 10;
@@ -69,7 +69,9 @@ export default {
 }
 .locale-list {
   line-height: 50px;
+  color: rgb(0,0,0,0.7);
 }
+
 @media screen and (max-width: 780px) {
   .sidebar-container {
     width: 0px;

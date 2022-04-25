@@ -18,7 +18,7 @@ export default {
   width: 100%;
   height: 5vh;
   position: fixed;
-  background-color: black;
+  background-color: #313944;
   color: white;
   font-size: 32px !important;
   text-align: left;

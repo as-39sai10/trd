@@ -5,7 +5,7 @@
         <div slot="header" class="clearfix">
           <span class="span-type">● {{ woeid.prefecture }} ●</span>
         </div>
-        <ul v-loading="loading">
+        <ul class="ul-list" v-loading="loading">
           <li
             :class="{
               'row-disp-none': index + 1 > 15 && rowVisibled[ind] === false,
@@ -22,7 +22,7 @@
               <div class="tw-vol text-left" v-if="arr.tweet_volume">
                 {{ arr.tweet_volume }}件のツイート
               </div>
-              <div class="tw-vol text-left" else-if=""></div>
+              <div class="tw-vol-none text-left" else-if=""></div>
             </div>
             <!-- <div>{{ arr.query }}</div>
       <div>{{ arr.url }}</div> -->
@@ -32,7 +32,7 @@
             :class="{ 'row-disp-none': rowVisibled[ind] === true }"
           >
             <el-button
-              type="success"
+              type="primary"
               class="btn-pos"
               @click="rowVisible(ind)"
               plain
@@ -157,7 +157,9 @@ ul {
 }
 .column-data {
   margin-bottom: 10px;
+  padding: 3px;
   height: 35px;
+  border-bottom: 1px solid #eeeeee;
 }
 .tr_name {
   font-size: 14px;
@@ -175,6 +177,9 @@ ul {
   font-size: 10px;
   height: 10px;
 }
+.tw-vol-none {
+  margin-bottom: 0px;
+}
 .row-disp-none {
   display: none;
 }
@@ -184,7 +189,11 @@ ul {
 .btn-mrg {
   margin-top: 15px;
 }
-
+.ul-list {
+  margin-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
 
 @media screen and (max-width: 780px) {
   .trends {
