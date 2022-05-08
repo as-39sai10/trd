@@ -38,9 +38,13 @@
     font-size: 18px;
     font-family: 'Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3',sans-serif;
 }
-.el-menu-item:hover {    
-    background-color: skyblue !important;
+.el-menu-item:hover {  
+    background-color: #409eff !important;
 }
+.el-menu-item:hover .locale-list{ 
+    color:  white !important;
+}
+
 .el-menu {
     background-color: #ffffff !important;
 }
