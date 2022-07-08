@@ -5,7 +5,7 @@
         <div slot="header" class="clearfix">
           <span class="span-type">● {{ woeid.prefecture }} ●</span>
         </div>
-        <ul class="ul-list" v-loading="loading">
+        <ul class="ul-list" v-loading="loadingMap[ind]">
           <li
             :class="{
               'row-disp-none': index + 1 > 15 && rowVisibled[ind] === false,
@@ -57,6 +57,7 @@ export default {
       woeidList: this.all_woeid,
       changed: false,
       loading: true,
+      loadingMap: [],
       rowVisibled: [false],
       changeArea: "japan_woeid",
       buf: [],
@@ -69,20 +70,18 @@ export default {
     getTrdList: function (areaData) {
       var _this = this;
       // var buf = [];
-      let areaStr = areaData;
-
-      if (_this.loading === false) {
-        _this.loading = true;
-      }
+      let areaStr = areaData;      
 
       _this.buf = [];
       _this.resultList = [];
       _this.rowVisibled = [];
+      _this.loadingMap = [];
       for (const key in _this.woeidList) {
         if (areaStr === key) {
           for (const arr of _this.woeidList[key].id) {
             _this.buf.push(arr);
             _this.rowVisibled.push(false);
+            _this.loadingMap.push(true);
           }
         }
       }
@@ -102,20 +101,17 @@ export default {
             }
           )
           .then((response) => {
-            _this.result = response.data;
-            _this.resultList.push(_this.result);
-            _this.$store.state.count = _this.$store.state.count + 1;
-            if (_this.$store.state.limitCount === _this.$store.state.count) {
-              _this.loading = false;
-              return _this.resultList;
+              _this.result = response.data;
+              _this.resultList.push(_this.result);            
+              _this.loadingMap[_this.$store.state.count] = false 
+              _this.$store.state.count = _this.$store.state.count + 1;
             }
-          })
+          )
           .catch((err) => {
             console.error(err);
           });
       }
 
-      // return _this.resultList;
     },
     testFnc: function (data) {
       alert(data);
@@ -195,6 +191,9 @@ ul {
   padding-right: 20px;
 }
 
+.btn-tweet {
+  background: skyblue;
+}
 @media screen and (max-width: 780px) {
   .trends {
     margin-left: 5px;
