@@ -74,7 +74,8 @@ export default {
 
 @media screen and (max-width: 780px) {
   .sidebar-container {
-    width: 0px;
+    /* width: 0px; */
+    display: none;
   }
 }
 </style>

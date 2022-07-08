@@ -14,18 +14,16 @@
             v-for="(arr, index) in resultList[ind]"
             :key="index"
           >
-            <div class="text-left">
+            <p class="num-name">
               <span class="index-no">{{ index + 1 }}.</span>
               <a class="text-left tr_name" :href="arr.url" target="_blank">{{
                 arr.name
               }}</a>
-              <div class="tw-vol text-left" v-if="arr.tweet_volume">
-                {{ arr.tweet_volume }}件のツイート
-              </div>
-              <div class="tw-vol-none text-left" else-if=""></div>
-            </div>
-            <!-- <div>{{ arr.query }}</div>
-      <div>{{ arr.url }}</div> -->
+            </p>
+            <p class="tw-vol" v-if="arr.tweet_volume">
+              {{ arr.tweet_volume }}件のツイート
+            </p>
+            <div class="tw-vol-none text-left" else-if=""></div>
           </li>
           <div
             class="btn-mrg"
@@ -70,7 +68,7 @@ export default {
     getTrdList: function (areaData) {
       var _this = this;
       // var buf = [];
-      let areaStr = areaData;      
+      let areaStr = areaData;
 
       _this.buf = [];
       _this.resultList = [];
@@ -101,17 +99,15 @@ export default {
             }
           )
           .then((response) => {
-              _this.result = response.data;
-              _this.resultList.push(_this.result);            
-              _this.loadingMap[_this.$store.state.count] = false 
-              _this.$store.state.count = _this.$store.state.count + 1;
-            }
-          )
+            _this.result = response.data;
+            _this.resultList.push(_this.result);
+            _this.loadingMap[_this.$store.state.count] = false;
+            _this.$store.state.count = _this.$store.state.count + 1;
+          })
           .catch((err) => {
             console.error(err);
           });
       }
-
     },
     testFnc: function (data) {
       alert(data);
@@ -152,26 +148,33 @@ ul {
   margin-top: 5vh;
 }
 .column-data {
-  margin-bottom: 10px;
-  padding: 3px;
+  /* margin-bottom: 1px; */
+  padding-top: 8px;
+  padding-bottom: 8px;
   height: 35px;
   border-bottom: 1px solid #eeeeee;
 }
+.index-no {
+  float: left;
+  width: 10px;
+}
 .tr_name {
+  padding-left: 25px;
   font-size: 14px;
   color: black;
   font-weight: 600;
+  float: left;
 }
-.text-left {
-  text-align: left;
-}
-.index-no {
-  padding-right: 10px;
+.num-name {
+  margin-bottom: 0px;
+  margin-top: 0px;
+  height: 22px;
 }
 .tw-vol {
-  margin-left: 30px;
-  font-size: 10px;
-  height: 10px;
+  padding-left: 35px;
+  margin: 0 0;
+  font-size: 11px;
+  float: left;
 }
 .tw-vol-none {
   margin-bottom: 0px;
