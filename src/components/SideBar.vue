@@ -18,6 +18,7 @@
         </el-menu-item>
       </ul>
     </el-menu>
+    <a href="/about">about</a>  
   </div>
 </template>
 

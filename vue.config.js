@@ -8,4 +8,9 @@ module.exports = {
       title: "trdnow"
     }
   },
+  devServer: {
+    port: 3333,
+    proxy: 'http://localhost:3333'
+  },
+
 }
