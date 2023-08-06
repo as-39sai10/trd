@@ -1,7 +1,7 @@
 module.exports = {
   outputDir: 'docs',
   assetsDir: './',
-  publicPath: './',
+  publicPath: '/trdNow',
   pages: {
     index: {
       entry: "src/main.js",
