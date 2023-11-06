@@ -1,7 +1,7 @@
 module.exports = {
-  outputDir: 'docs',
   assetsDir: './',
   publicPath: './',
+  outputDir: 'docs',
   pages: {
     index: {
       entry: "src/main.js",
