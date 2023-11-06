@@ -1,6 +1,6 @@
 module.exports = {
-  // assetsDir: './',
-  publicPath: '/trdNow',
+  assetsDir: './',
+  publicPath: './',
   outputDir: 'docs',
   pages: {
     index: {
@@ -8,9 +8,9 @@ module.exports = {
       title: "trdnow"
     }
   },
-  devServer: {
-    port: 3333,
-    proxy: 'http://localhost:3333'
-  },
+  // devServer: {
+  //   port: 3333,
+  //   proxy: 'http://localhost:3333'
+  // },
 
 }
