@@ -1,0 +1,205 @@
+<template>
+  <div class="trends">
+    <div class="row-possion" v-for="(woeid, ind) in buf" :key="ind">
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <span class="span-type">● {{ woeid.prefecture }} ●</span>
+        </div>
+        <ul class="ul-list" v-loading="loadingMap[ind]">
+          <li
+            :class="{
+              'row-disp-none': index + 1 > 15 && rowVisibled[ind] === false,
+            }"
+            class="column-data"
+            v-for="(arr, index) in resultList[ind]"
+            :key="index"
+          >
+            <p class="num-name">
+              <span class="index-no">{{ index + 1 }}.</span>
+              <a class="text-left tr_name" :href="arr.url" target="_blank">{{
+                arr.name
+              }}</a>
+            </p>
+            <p class="tw-vol" v-if="arr.tweet_volume">
+              {{ arr.tweet_volume }}件のツイート
+            </p>
+            <div class="tw-vol-none text-left" else-if=""></div>
+          </li>
+          <div
+            class="btn-mrg"
+            :class="{ 'row-disp-none': rowVisibled[ind] === true }"
+          >
+            <el-button
+              type="primary"
+              class="btn-pos"
+              @click="rowVisible(ind)"
+              plain
+              >...more</el-button
+            >
+          </div>
+        </ul>
+      </el-card>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "trendsList",
+  props: ["all_woeid"],
+  data() {
+    return {
+      value: "",
+      result: [],
+      resultList: [],
+      woeidList: this.all_woeid,
+      changed: false,
+      loading: true,
+      loadingMap: [],
+      rowVisibled: [false],
+      changeArea: "japan_woeid",
+      buf: [],
+    };
+  },
+  created() {
+    this.getTrdList(this.changeArea);
+  },
+  methods: {
+    getTrdList: function (areaData) {
+      var _this = this;
+      // var buf = [];
+      let areaStr = areaData;
+
+      _this.buf = [];
+      _this.resultList = [];
+      _this.rowVisibled = [];
+      _this.loadingMap = [];
+      for (const key in _this.woeidList) {
+        if (areaStr === key) {
+          for (const arr of _this.woeidList[key].id) {
+            _this.buf.push(arr);
+            _this.rowVisibled.push(false);
+            _this.loadingMap.push(true);
+          }
+        }
+      }
+
+      _this.$store.state.limitCount = _this.buf.length;
+
+      for (const local of _this.buf) {
+        console.log(local.value);
+        _this.$store.state.count = 0;
+        this.axios
+          .get(
+            "https://script.google.com/macros/s/AKfycbwh9EDbmniulQpryJbowVsNS02edUHu2nRsgsTXL4xNfrB-rLuIGnN0BliP3RApbin8kQ/exec",
+            {
+              params: {
+                id: local.value, // 日本
+              },
+            }
+          )
+          .then((response) => {
+            _this.result = response.data;
+            _this.resultList.push(_this.result);
+            _this.loadingMap[_this.$store.state.count] = false;
+            _this.$store.state.count = _this.$store.state.count + 1;
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    },
+    testFnc: function (data) {
+      alert(data);
+    },
+    rowVisible: function (ind) {
+      this.$set(this.rowVisibled, ind, true);
+    },
+  },
+  computed: {
+    setArea() {
+      return this.$store.getters.getArea;
+    },
+  },
+  watch: {
+    setArea() {
+      this.changeArea = this.$store.state.area;
+      // this.testFnc(this.changeArea);
+      this.getTrdList(this.changeArea);
+    },
+  },
+};
+</script>
+
+<style >
+ul {
+  list-style: none;
+}
+.item-possion {
+  float: left;
+}
+.trends {
+  margin-left: 200px;
+  margin-bottom: 30px;
+  display: flex;
+}
+.row-possion {
+  padding-right: 10px;
+  margin-top: 5vh;
+}
+.column-data {
+  /* margin-bottom: 1px; */
+  padding-top: 8px;
+  padding-bottom: 8px;
+  height: 35px;
+  border-bottom: 1px solid #eeeeee;
+}
+.index-no {
+  float: left;
+  width: 10px;
+}
+.tr_name {
+  padding-left: 25px;
+  font-size: 14px;
+  color: black;
+  font-weight: 600;
+  float: left;
+}
+.num-name {
+  margin-bottom: 0px;
+  margin-top: 0px;
+  height: 22px;
+}
+.tw-vol {
+  padding-left: 35px;
+  margin: 0 0;
+  font-size: 11px;
+  float: left;
+}
+.tw-vol-none {
+  margin-bottom: 0px;
+}
+.row-disp-none {
+  display: none;
+}
+.btn-pos {
+  margin-right: 30px !important;
+}
+.btn-mrg {
+  margin-top: 15px;
+}
+.ul-list {
+  margin-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.btn-tweet {
+  background: skyblue;
+}
+@media screen and (max-width: 780px) {
+  .trends {
+    margin-left: 5px;
+  }
+}
+</style>
