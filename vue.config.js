@@ -1,5 +1,5 @@
 module.exports = {
-  assetsDir: './trdNow',
+  assetsDir: './',
   publicPath: './trdNow',
   outputDir: 'docs',
   pages: {
